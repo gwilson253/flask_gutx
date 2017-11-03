@@ -12,7 +12,7 @@ class Config:
     MAIL_USERNAME = os.environ.get('itk_gmail_address')
     MAIL_PASSWORD = os.environ.get('itk_gmail_password')
     GUTX_MAIL_SUBJECT_PREFIX = '[Flask GutX]'
-    GUTX_MAIL_SENDER = 'Flask GutX <{}>'.format(os.environ.get('itk_gmail_address'))
+    GUTX_MAIL_SENDER = os.environ.get('itk_gmail_address')
     GUTX_ADMIN = os.environ.get('itk_gmail_username')
 
     @staticmethod

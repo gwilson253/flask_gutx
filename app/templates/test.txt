@@ -1,0 +1,10 @@
+Welcome to GutX!
+
+hello, {{ user.username }}!
+{{ token }}
+
+Sincerely,
+
+The GutX Team
+
+Note: replies to this email address are not monitored.
