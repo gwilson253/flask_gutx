@@ -14,6 +14,7 @@ class Config:
     GUTX_MAIL_SUBJECT_PREFIX = '[Flask GutX]'
     GUTX_MAIL_SENDER = os.environ.get('itk_gmail_address')
     GUTX_ADMIN = os.environ.get('itk_gmail_username')
+    FLASK_GUTX_ADMIN = os.environ.get('FLASK_GUTX_ADMIN')
 
     @staticmethod
     def init_app(app):
