@@ -11,9 +11,9 @@ from datetime import datetime
 class Permission:
     FOLLOW = 0x01
     COMMENT = 0X02
-    WRITE_ARTICLES = 0X04
-    MODERATE_COMMENTS = 0X08
-    ADMINISTER = 0X80
+    WRITE = 0X04
+    MODERATE = 0X08
+    ADMIN = 0X80
 
 class Role(db.Model):
     __tablename__ = 'roles'
@@ -28,11 +28,11 @@ class Role(db.Model):
         roles = {
                 'User': (Permission.FOLLOW |
                          Permission.COMMENT |
-                         Permission.WRITE_ARTICLES, True),
+                         Permission.WRITE, True),
                 'Moderator': (Permission.FOLLOW |
                               Permission.COMMENT |
-                              Permission.WRITE_ARTICLES |
-                              Permission.MODERATE_COMMENTS, False),
+                              Permission.WRITE |
+                              Permission.MODERATE, False),
                 'Administrator': (0xff, False)
                 }
         for r in roles:
@@ -61,6 +61,7 @@ class User(UserMixin, db.Model):
     member_since = db.Column(db.DateTime(), default=datetime.utcnow())
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow())
     avatar_hash = db.Column(db.String(32))
+    posts = db.relationship('Post', backref='author', lazy='dynamic')
     
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -142,7 +143,7 @@ class User(UserMixin, db.Model):
             (self.role.permissions & permissions) == permissions
             
     def is_administrator(self):
-        return self.can(Permission.ADMINISTER)
+        return self.can(Permission.ADMIN)
 
     def ping(self):
         self.last_seen = datetime.utcnow()
@@ -175,3 +176,10 @@ login_manager.anonymous_user = AnonymousUser
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+class Post(db.Model):
+    __tablename__ = 'posts'
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.Text)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))

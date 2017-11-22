@@ -99,7 +99,7 @@ class UserModelTestCase(unittest.TestCase):
         self.assertTrue(
                 (datetime.utcnow() - u.member_since).total_seconds() < 60)
         self.assertTrue(
-                (datetime.utcnow() - u.last_seen).total_seconds() < 3)
+                (datetime.utcnow() - u.last_seen).total_seconds() < 60)
         
     def test_ping(self):
         u = User(password='cat')
