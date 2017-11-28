@@ -9,11 +9,11 @@ class Config:
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = os.environ.get('itk_gmail_address')
-    MAIL_PASSWORD = os.environ.get('itk_gmail_password')
+    MAIL_USERNAME = os.environ.get('ITK_GMAIL_ADDRESS')
+    MAIL_PASSWORD = os.environ.get('ITK_GMAIL_PASSWORD')
     GUTX_MAIL_SUBJECT_PREFIX = '[Flask GutX]'
-    GUTX_MAIL_SENDER = os.environ.get('itk_gmail_address')
-    GUTX_ADMIN = os.environ.get('itk_gmail_username')
+    GUTX_MAIL_SENDER = os.environ.get('ITK_GMAIL_ADDRESS')
+    GUTX_ADMIN = os.environ.get('ITK_GMAIL_USERNAME')
     FLASK_GUTX_ADMIN = os.environ.get('FLASK_GUTX_ADMIN')
     POSTS_PER_PAGE = 15
 
