@@ -16,6 +16,7 @@ class Config:
     GUTX_ADMIN = os.environ.get('ITK_GMAIL_USERNAME')
     FLASK_GUTX_ADMIN = os.environ.get('FLASK_GUTX_ADMIN')
     POSTS_PER_PAGE = 15
+    FOLLOWERS_PER_PAGE = 20
 
     @staticmethod
     def init_app(app):
